@@ -32,7 +32,11 @@ def main():
 
     # Generate a correlation heatmap
     print("\nCreating correlation heatmap...")
-    correlation_matrix = data.corr()
+    
+    # Select only numerical features for correlation analysis
+    numerical_data = data.select_dtypes(include=['number'])
+    
+    correlation_matrix = numerical_data.corr()  # Calculate correlation on numerical data only
     plt.figure(figsize=(10, 8))
     sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
     heatmap_filename = "goodreads_correlation_heatmap.png"
